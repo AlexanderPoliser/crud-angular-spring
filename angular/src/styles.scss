@@ -1,0 +1,37 @@
+/* You can add global styles to this file, and also import other style files */
+
+@use "@angular/material" as mat;
+
+@include mat.core();
+
+$green-palette: (
+  500: #4caf50,
+);
+$light-green-palette: (
+  200: #c5e1a5,
+);
+
+$my-app-primary: mat.define-palette(mat.$green-palette, 500);
+$my-app-accent: mat.define-palette(mat.$light-green-palette, 200);
+$my-app-warn: mat.define-palette(mat.$red-palette);
+
+$my-app-theme: mat.define-light-theme(
+  (
+    color: (
+      primary: $my-app-primary,
+      accent: $my-app-accent,
+      warn: $my-app-warn,
+    ),
+  )
+);
+
+@include mat.all-component-themes($my-app-theme);
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
