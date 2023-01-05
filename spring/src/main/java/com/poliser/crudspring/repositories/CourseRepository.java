@@ -1,4 +1,4 @@
-package com.poliser.crudspring.repository;
+package com.poliser.crudspring.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

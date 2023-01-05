@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
 import com.poliser.crudspring.models.Course;
-import com.poliser.crudspring.repository.CourseRepository;
+import com.poliser.crudspring.repositories.CourseRepository;
 
 @SpringBootApplication
 public class CrudSpringApplication {
