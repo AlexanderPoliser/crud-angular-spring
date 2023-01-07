@@ -14,11 +14,11 @@
 
       <mat-form-field class="full-width">
         <mat-label>Course category</mat-label>
-        <input
-          matInput
-          placeholder="E.g. Frontend"
-          formControlName="category"
-        />
+        <mat-select formControlName="category">
+          <mat-option value="null"></mat-option>
+          <mat-option value="Frontend">Frontend</mat-option>
+          <mat-option value="Backend">Backend</mat-option>
+        </mat-select>
       </mat-form-field>
     </form>
   </mat-card-content>
