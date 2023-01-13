@@ -9,7 +9,12 @@
           matInput
           placeholder="E.g. Mastering Angular"
           formControlName="name"
+          #name
         />
+        <mat-hint>{{ name.value?.length }} / 100</mat-hint>
+        <mat-error *ngIf="form.get('name')?.invalid">{{
+          getErrorMessage("name")
+        }}</mat-error>
       </mat-form-field>
 
       <mat-form-field class="full-width">
