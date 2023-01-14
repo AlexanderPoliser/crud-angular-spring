@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.poliser.crudspring.models.Course;
 import com.poliser.crudspring.repositories.CourseRepository;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
+@Validated
 @RestController
 @RequestMapping("/api/courses")
 public class CourseController {
@@ -33,7 +39,7 @@ public class CourseController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Course> findById(@PathVariable Long id) {
+    public ResponseEntity<Course> findById(@PathVariable @NotNull @Positive Long id) {
         return courseRepository.findById(id)
                 .map(response -> ResponseEntity.ok().body(response))
                 .orElse(ResponseEntity.notFound().build());
@@ -41,12 +47,13 @@ public class CourseController {
 
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Course createCourse(@RequestBody Course course) {
+    public Course createCourse(@RequestBody @Valid Course course) {
         return courseRepository.save(course);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Course> updateCourse(@PathVariable Long id, @RequestBody Course course) {
+    public ResponseEntity<Course> updateCourse(@PathVariable @NotNull @Positive Long id,
+            @RequestBody @Valid Course course) {
         return courseRepository.findById(id).map(response -> {
             response.setName(course.getName());
             response.setCategory(course.getCategory());
@@ -58,7 +65,7 @@ public class CourseController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCourse(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteCourse(@PathVariable @NotNull @Positive Long id) {
         return courseRepository.findById(id).map(response -> {
             courseRepository.deleteById(id);
             return ResponseEntity.noContent().<Void>build();
